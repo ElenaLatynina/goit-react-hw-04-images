@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ModalPicture, Overlay  } from './Modal.styled';
 
 
 export class Modal extends Component{
@@ -22,13 +23,25 @@ export class Modal extends Component{
         
     };
 
+     handleBackdropClick = event => {
+    if (event.target === event.currentTarget) this.props.onClose();
+  };
+
     render() {
+        const { src, alt } = this.props;
         return (
             <Overlay>
                 <ModalPicture>
-                   <img/>
+                    <img src={src} alt={ alt} />
                 </ModalPicture>
             </Overlay>
         )
     };
+};
+
+export default Modal;
+Modal.propTypes = {
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    onClose:PropTypes.func.isRequired,
 }
