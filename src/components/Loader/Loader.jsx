@@ -1,4 +1,4 @@
-import { Progress Bar, ProgressBar } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
 import { Spinner } from './Loader.styled';
 
 const Loader = () => {
@@ -16,3 +16,5 @@ const Loader = () => {
         </Spinner>
     );
 };
+
+export default Spinner;
