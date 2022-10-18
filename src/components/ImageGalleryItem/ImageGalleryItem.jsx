@@ -8,15 +8,29 @@ class ImageGalleryItem extends Component{
         isModalOpen: false,
     };
 
+  toggleModal = () => {
+    this.setState(prevState => ({
+      isModalOpen: !prevState.isModalOpen,
+    }));
+  };
 
     render() {
+        const { largeImageURL, webformatURL, tags } = this.props.image;
         return (
             <Item>
-                <Img src="" alt="" />
-                {this.state.isModalOpen&&(<Modal/>)}
+                <Img src={webformatURL} alt={tags} onClick={ this.toggleModal} />
+                {this.state.isModalOpen && (<Modal srs={largeImageURL} alt={tags}
+                    onClick={this.toggleModal} />)}
             </Item>
         )
     }
 };
 
 export default ImageGalleryItem;
+Item.propTypes = {
+    image: PropTypes.shape({
+        largeImageURL: PropTypes.string.isRequired,
+        webformatURL: PropTypes.string.isRequired,
+        tags: PropTypes.string,
+    }).isRequired,
+};

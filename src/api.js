@@ -6,7 +6,7 @@ const PARAMS = 'image_type=photo&orientation=horizontal&safesearch=true';
 const Per_page = 12;
 
 export const receiveData = async (query, page) => {
-    const url = `${BASE_URL}?key=${API_KEY}&q=${query}&{PARAMS}&page=${page}&per_page=${Per_page}`;
+    const url = `${BASE_URL}?key=${API_KEY}&q=${query}&${PARAMS}&page=${page}&per_page=${Per_page}`;
 
     const response = await axios.get(url);
     const images = response.data.hits;
