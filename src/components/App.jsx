@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
-import { receiveData } from 'api';
-import Button from './Button';
+// import { receiveData } from 'api';
+import Button from './Button/Button';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export class App extends Component{
     state = {
@@ -24,6 +26,7 @@ export class App extends Component{
                 <ImageGallery>
                     <Button></Button>
                 </ImageGallery>
+                <ToastContainer />
 
                 
             </>

@@ -1,6 +1,6 @@
 import { LoadMore } from "./Button.styled";
 
-const Button = ({ clickHandle }) => {
+export const Button = ({ clickHandle }) => {
   return (
     <LoadMore type="button" onClick={clickHandle}>
       Load more
@@ -8,4 +8,4 @@ const Button = ({ clickHandle }) => {
   );
 };
 
-export default LoadMore;
+export default Button;
