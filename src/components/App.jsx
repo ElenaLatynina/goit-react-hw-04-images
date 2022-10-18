@@ -7,8 +7,13 @@ import Button from './Button';
 
 export class App extends Component{
     state = {
-        
-    };
+    images: [],
+    query: '',
+    loading: false,
+    error: null,
+    page: 1,
+    total: 1,
+  };
 
 
 
