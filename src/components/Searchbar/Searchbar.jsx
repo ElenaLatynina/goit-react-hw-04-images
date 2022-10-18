@@ -9,16 +9,16 @@ class Searchbar extends Component{
 
   };
 
-  onHandleInput = event => {
+  handleInput = event => {
     const query = event.currentTarget.value;
     this.setState({ query: query });
   };
 
-  onHandleSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
     if (this.search.query.trim() === '') return toast.error('There is no query to search');
     // if (this.search.query.trim() === '') return alert('There is no query to search');
-    this.props.onHandleSubmit(this.state.query);
+    this.props.handleSubmit(this.state.query);
     this.setState({ query: '' });
   
 
@@ -30,7 +30,7 @@ class Searchbar extends Component{
     render() {
         return (
       <Header >
-        <Searchform onSubmit={this.onHandleSubmit}>
+        <Searchform onSubmit={this.handleSubmit}>
           <Searchbutton type="submit" >
             <Label >Search</Label>
           </Searchbutton>
@@ -42,7 +42,7 @@ class Searchbar extends Component{
             autofocus
             placeholder="Search images and photos"
             value={this.state.query}
-            onChange={this.onHandleInput}
+            onChange={this.handleInput}
           />
         </Searchform>
       </Header>
@@ -53,5 +53,5 @@ class Searchbar extends Component{
 export default Searchbar;
 
 Searchbar.propTypes = {
-  onHandleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
