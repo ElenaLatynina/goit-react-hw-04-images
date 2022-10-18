@@ -3,28 +3,53 @@ import PropTypes from 'prop-types';
 import { Header, Searchform, Input, Label, Searchbutton } from './Searchbar.styled';
 
 class Searchbar extends Component{
+  state = {
+    query :'',
+
+  };
+
+  onHandleInput = event => {
+    const query = event.currentTarget.value;
+    this.setState({ query: query });
+  };
+
+  onHandleSubmit = event => {
+    event.preventDefault();
+    if (this.search.query.trim() === '') return alert('There is no query to search');
+    this.props.onHandleSubmit(this.state.query);
+    this.setState({ query: '' });
+  
+
+
+  }
 
 
 
     render() {
         return (
-            <Header class="searchbar">
-  <Searchform class="form">
-    <Searchbutton type="submit" class="button">
-      <Label class="button-label">Search</Label>
-    </Searchbutton>
+  <Header >
+    <Searchform onSubmit={this.onHandleSubmit}>
+      <Searchbutton type="submit" >
+        <Label >Search</Label>
+      </Searchbutton>
 
-    <Input
-      class="input"
-      type="text"
-      autocomplete="off"
-      autofocus
-      placeholder="Search images and photos"
-    />
-  </Searchform>
-</Header>
+      <Input
+        class="input"
+        type="text"
+        autocomplete="off"
+        autofocus
+        placeholder="Search images and photos"
+        value={this.state.query}
+        onChange={this.onHandleInput}
+      />
+    </Searchform>
+  </Header>
         )
     }
 }
 
 export default Searchbar;
+
+Searchbar.propTypes = {
+  onHandleSubmit: PropTypes.func.isRequired,
+};

@@ -7,9 +7,9 @@ class ImageGalleryItem extends Component{
 
     render() {
         return (
-            <ImageGalleryItem class="gallery-item">
+            <li class="gallery-item">
             <img src="" alt="" />
-            </ImageGalleryItem>
+            </li>
         )
     }
 };
