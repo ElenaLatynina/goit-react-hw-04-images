@@ -20,12 +20,8 @@ class Searchbar extends Component{
     // if (this.search.query.trim() === '') return alert('There is no query to search');
     this.props.handleSubmit(this.state.query);
     this.setState({ query: '' });
-  
 
-
-  }
-
-
+  };
 
     render() {
         return (

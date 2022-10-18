@@ -30,7 +30,7 @@ export class Modal extends Component{
     render() {
         const { src, alt } = this.props;
         return (
-            <Overlay>
+            <Overlay onClick={this.handleBackdropClick}>
                 <ModalPicture>
                     <img src={src} alt={ alt} />
                 </ModalPicture>
