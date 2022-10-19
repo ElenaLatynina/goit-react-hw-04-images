@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { List } from './ImageGallery.styled';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ hits }) => {
     return (
         <List>
-            {images.map(image => (
-                <ImageGalleryItem key={image.id} image={image}></ImageGalleryItem>
+            {hits.map(hit => (
+                <ImageGalleryItem key={hit.id} hit={hit}></ImageGalleryItem>
             ))}
   
         </List>

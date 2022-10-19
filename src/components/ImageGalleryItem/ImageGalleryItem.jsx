@@ -15,7 +15,7 @@ class ImageGalleryItem extends Component{
   };
 
     render() {
-        const { largeImageURL, webformatURL, tags } = this.props.image;
+        const { largeImageURL, webformatURL, tags } = this.props.hit;
         return (
             <Item>
                 <Img src={webformatURL} alt={tags} onClick={ this.toggleModal} />

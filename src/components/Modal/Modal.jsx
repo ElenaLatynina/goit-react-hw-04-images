@@ -5,7 +5,7 @@ import { ModalPicture, Overlay  } from './Modal.styled';
 
 export class Modal extends Component{
     state = {
-        isOpen: false,
+        isNodalOpen: false,
     };
 
     handleKeydown = event => {
