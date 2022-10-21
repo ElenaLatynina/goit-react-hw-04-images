@@ -14,3 +14,4 @@ export const ImageGallery = ({ hits, onClick }) => {
     );
 
 };
+export default ImageGallery;
