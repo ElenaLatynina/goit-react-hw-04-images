@@ -4,9 +4,6 @@ import { ModalPicture, Overlay  } from './Modal.styled';
 
 
 export class Modal extends Component{
-    state = {
-        isNodalOpen: false,
-    };
 
     handleKeydown = event => {
     if (event.code === 'Escape') {
@@ -14,25 +11,23 @@ export class Modal extends Component{
     }
     };
     
+    handleBackdropClick = event => {
+        if (event.target === event.currentTarget) this.props.onClose();
+    };
+
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeydown)
     };
 
     componentDidUpdate() {
         window.removeEventListener('keydown', this.handleKeydown)
-        
     };
 
-     handleBackdropClick = event => {
-    if (event.target === event.currentTarget) this.props.onClose();
-  };
-
     render() {
-        const { largeImageURL, tags } = this.props;
         return (
             <Overlay onClick={this.handleBackdropClick}>
                 <ModalPicture>
-                    <img src={largeImageURL} alt={ tags} />
+                    <img src={this.props.largeImageURL} alt={this.props.tags} />
                 </ModalPicture>
             </Overlay>
         )

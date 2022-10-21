@@ -10,16 +10,14 @@ class Searchbar extends Component{
   };
 
   handleInput = event => {
-    const query = event.currentTarget.value;
+    const query = event.target.value.toLowerCase();
     this.setState({ query: query });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    // if (this.search.query.trim() === '') return toast.error('There is no query to search');
-    // if (this.search.query.trim() === '') return alert('There is no query to search');
     this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
+    // this.setState({ query: '' });
 
   };
 

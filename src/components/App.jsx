@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
+import * as API from './API/api';
 import axios from "axios";
 import { Container } from './App.styled';
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
-import { receiveData } from 'api';
 import Button from './Button/Button';
 import Loader from './Loader';
-import { ToastContainer} from 'react-toastify';
+// import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import Modal from 'components/Modal';
 
 export class App extends Component {
   state = {
     query: '',
+    page:1,
     hits: [],
     isLoading: false,
-    isBattonVisible: true,
-    page: 1,
     largeImageURL: '',
-    
+    totalPages: 0,
+    error:null,
     
   };
 
@@ -32,30 +32,24 @@ export class App extends Component {
     this.setState(prevState => ({ page: prevState.page + 1 }))
   };
 
-  togleModal = largeImageURL => { this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen, largeImageURL, })) };
+  // togleModal = largeImageURL => { this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen, largeImageURL, })) };
 
-  loadImages = async query => {
-    this.setState({ query, isLoading: true, isBattonVisible: true });
+  loadImages = async (query, page) => {
+    this.setState({ isLoading: true  });
 
     try {
-      const url = receiveData(query, this.state.page);
-      const response = await axios.get(url);
-      const {
-        data: { hits, totalHits }
-      } = response;
-
-      if (hits.length < 1 && this.state.page === 1) {
-        this.setState({ isLoading: false, hits: [] });
-
-        throw new Error(Promise.reject('Sorry, there are no images matching your search query. Please try again.'));
-         
-      };
-
-      if (this.state.page >= Math.ceil(totalHits / 12)) {
-      this.setState({ isBattonVisible: false });
+      const data = await API.receiveData(query, page);
+      
+      if (data.hits.length  === 0) {
+        this.setState({
+          error: { message: `Sorry, there are no images matching your query. Please try again`, },
+        });
+        return;
+      }
+      this.setState(prevState => prevState.page !== 1 ? { hits: prevState.hits.concat(hits), isLoading: false, } : { hits, isLoading: false });
     }
       
-    this.setState(prevState => prevState.page !== 1 ? { hits: prevState.hits.concat(hits), isLoading: false, } : { hits, isLoading: false });
+    
 
 
     // await receiveData(this.state.query, this.state.page)
@@ -80,17 +74,7 @@ export class App extends Component {
         {/* {this.state.error && toast.error('Something went wrong')} */}
         <ImageGallery images={this.hits} />
         {this.state.page < this.totalHits && <Button onClick={this.loadMore}>Load More</Button>}
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"/>
+        
       </Container>
     )
   };

@@ -1,22 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { List } from './ImageGallery.styled';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 
-export const ImageGallery = ({ hits }) => {
+export const ImageGallery = ({ hits, onClick }) => {
    
     return (
         <List>
-            {hits.map(hit => (
-                <ImageGalleryItem key={hit.id} hit={hit} ></ImageGalleryItem>
+            {hits.map(({ webformatURL, largeImageURL, tags, id }) => (
+                <ImageGalleryItem key={id} webformatURL={webformatURL} largeImageURL={largeImageURL} tags={tags} onClick={onClick} ></ImageGalleryItem>
             ))}
   
         </List>
     );
 
-};
-
-export default ImageGallery;
-ImageGallery.propTypes = {
-    hits: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
