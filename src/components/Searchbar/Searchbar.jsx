@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Searchform, Input, Label, Searchbutton } from './Searchbar.styled';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 class Searchbar extends Component{
   state = {
@@ -16,9 +16,9 @@ class Searchbar extends Component{
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.search.query.trim() === '') return toast.error('There is no query to search');
+    // if (this.search.query.trim() === '') return toast.error('There is no query to search');
     // if (this.search.query.trim() === '') return alert('There is no query to search');
-    this.props.handleSubmit(this.state.query);
+    this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
 
   };
@@ -49,5 +49,5 @@ class Searchbar extends Component{
 export default Searchbar;
 
 Searchbar.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

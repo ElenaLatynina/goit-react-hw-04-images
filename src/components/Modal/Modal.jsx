@@ -28,11 +28,11 @@ export class Modal extends Component{
   };
 
     render() {
-        const { src, alt } = this.props;
+        const { largeImageURL, tags } = this.props;
         return (
             <Overlay onClick={this.handleBackdropClick}>
                 <ModalPicture>
-                    <img src={src} alt={ alt} />
+                    <img src={largeImageURL} alt={ tags} />
                 </ModalPicture>
             </Overlay>
         )

@@ -6,7 +6,7 @@ import ImageGallery from './ImageGallery';
 import { receiveData } from 'api';
 import Button from './Button/Button';
 import Loader from './Loader';
-import { ToastContainer, toast} from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import Modal from 'components/Modal';
 
@@ -47,7 +47,7 @@ export class App extends Component {
       if (hits.length < 1 && this.state.page === 1) {
         this.setState({ isLoading: false, hits: [] });
 
-        throw new Error(toast.error('Sorry, there are no images matching your search query. Please try again.'));
+        throw new Error(Promise.reject('Sorry, there are no images matching your search query. Please try again.'));
          
       };
 
@@ -77,7 +77,7 @@ export class App extends Component {
       <Container>
         <Searchbar onSubmit={this.loadImages}></Searchbar>
         {this.state.isLoading && <Loader />}
-        {this.state.error && toast.error('Something went wrong')}
+        {/* {this.state.error && toast.error('Something went wrong')} */}
         <ImageGallery images={this.hits} />
         {this.state.page < this.totalHits && <Button onClick={this.loadMore}>Load More</Button>}
         <ToastContainer

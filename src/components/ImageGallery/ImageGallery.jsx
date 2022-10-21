@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { List } from './ImageGallery.styled';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 
-const ImageGallery = ({ hits }) => {
+export const ImageGallery = ({ hits }) => {
+   
     return (
         <List>
             {hits.map(hit => (
-                <ImageGalleryItem key={hit.id} hit={hit}></ImageGalleryItem>
+                <ImageGalleryItem key={hit.id} hit={hit} ></ImageGalleryItem>
             ))}
   
         </List>
@@ -17,5 +18,5 @@ const ImageGallery = ({ hits }) => {
 
 export default ImageGallery;
 ImageGallery.propTypes = {
-    images: PropTypes.array.isRequired,
+    hits: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
