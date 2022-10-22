@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { Header, Searchform, Input, Label, Searchbutton } from './Searchbar.styled';
+import { IconContext } from 'react-icons';
+import { BiSearchAlt2 } from 'react-icons/bi';
 // import { toast } from 'react-toastify';
 
-export class Searchbar extends Component{
+export default class Searchbar extends Component{
   state = {
     query :'',
 
@@ -26,14 +28,20 @@ export class Searchbar extends Component{
         <Header >
           <Searchform onSubmit={this.handleSubmit}>
             <Searchbutton type="submit" >
-              <Label >Search</Label>
+               <IconContext.Provider
+              value={{ style: { verticalAlign: 'middle' } }}
+            >
+              <BiSearchAlt2 size={24} />
+            </IconContext.Provider>
+              <Label >	
+</Label>
             </Searchbutton>
 
             <Input
-              class="input"
+              // class="input"
               type="text"
               autocomplete="off"
-              autofocus
+              // autofocus
               placeholder="Search images and photos"
               value={this.state.query}
               onChange={this.handleChange}
@@ -44,7 +52,7 @@ export class Searchbar extends Component{
     }
 }
 
-export default Searchbar;
+// export default Searchbar;
 
 // Searchbar.propTypes = {
 //   onSubmit: PropTypes.func.isRequired,
