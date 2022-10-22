@@ -14,7 +14,7 @@ export class App extends Component {
   state = {
     query: '',
     page:1,
-    hits: [],
+    images: [],
     isLoading: false,
     largeImageURL: '',
     totalPages: 0,
@@ -23,7 +23,7 @@ export class App extends Component {
   };
 
   loadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }))
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   loadImages = async (query, page) => {
@@ -38,7 +38,7 @@ export class App extends Component {
         });
         return;
       }
-      this.setState(prevState => ({hits:[...prevState.hits, ...data.hits], totalPages:data.totalHits,}));
+      this.setState(prevState => ({images:[...prevState.hits, ...data.hits], totalPages:data.totalHits,}));
     
     
   } catch(error) {
@@ -48,18 +48,18 @@ export class App extends Component {
   }
 };
 
-  handdleSearchSubmit = query => {
+  handleSearchSubmit = query => {
     this.setState({
       query, hits: [], page: 1, totalPages: 0,
     })
   };
 
-  openModal = (largeImageURL) => { this.setState({ largeImageURL }) };
+  openModal = (largeImageURL) => { this.setState({ largeImageURL }); };
 
-  closeModal = () => { this.setState({ largeImageURL: '' }) };
+  closeModal = () => { this.setState({ largeImageURL: '' }); };
 
   componentDidUpdate(prevProps, prevState) {
-  if ( prevState.query !==this.state.query ||prevState.page !== this.state.page) {
+  if ( prevState.query !==this.state.query || prevState.page !== this.state.page) {
     this.loadImages(this.state.query, this.state.page);
   }
   };
@@ -67,13 +67,13 @@ export class App extends Component {
     return (
      
       <Container>
-        <Searchbar onSearch={this.handdleSearchSubmit} />
+        <Searchbar onSearch={this.handleSearchSubmit} />
         {this.state.error && <p>Something went wrong</p>}
 
-        {this.state.hits.length > 0 &&( <ImageGallery hits={this.hits} onClick={this.openModal} />)}
+        {this.state.images.length > 0 &&( <ImageGallery images={this.images} onClick={this.openModal} />)}
         {this.state.isLoading && <Loader />}
 
-        {this.state.page < Math.ceil(this.state.totalPages / 12) && (<Button onClick={this.loadMore} />)}
+        {this.state.page < Math.ceil(this.state.totalPages / 12) && (<Button loadMore={this.loadMore} />)}
         
         {this.state.largeImageURL && (<Modal closeModal={this.closeModal}largeImageURL={this.state.largeImageURL} />)}
        

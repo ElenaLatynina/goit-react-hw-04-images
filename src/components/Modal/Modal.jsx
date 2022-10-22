@@ -12,7 +12,7 @@ export class Modal extends Component{
     };
     
     handleBackdropClick = event => {
-        if (event.target === event.currentTarget) this.props.onClose();
+        if (event.target === event.currentTarget) { this.props.onClose(); }
     };
 
     componentDidMount() {
@@ -38,5 +38,5 @@ export default Modal;
 Modal.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
-    onClose:PropTypes.func.isRequired,
+    onClick:PropTypes.func.isRequired,
 }
