@@ -50,7 +50,7 @@ export class App extends Component {
 
   handleSearchSubmit = query => {
     this.setState({
-      query, hits: [], page: 1, totalPages: 0,
+      query, images: [], page: 1, totalPages: 0,
     })
   };
 
