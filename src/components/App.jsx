@@ -38,7 +38,7 @@ export class App extends Component {
         });
         return;
       }
-      this.setState(prevState => ({images:[...prevState.hits, ...data.hits], totalPages:data.totalHits,}));
+      this.setState(prevState => ({images:[...prevState.images, ...data.hits], totalPages:data.totalHits,}));
     
     
   } catch(error) {
