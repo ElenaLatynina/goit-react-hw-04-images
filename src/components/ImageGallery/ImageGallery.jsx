@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { List } from './ImageGallery.styled';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 
