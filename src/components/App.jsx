@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as API from './API/api';
+import * as API from '../components/API/api';
 // import axios from "axios";
 import { Container } from './App.styled';
 import Searchbar from './Searchbar';
@@ -38,8 +38,11 @@ export class App extends Component {
         });
         return;
       }
-      this.setState(prevState => ({images:[...prevState.images, ...data.hits], totalPages:data.totalHits,}));
-    
+      this.setState(prevState => ({
+        images: [...prevState.images, ...data.hits],
+        totalPages: data.totalPages,
+      }));
+     
     
   } catch(error) {
     this.setState([error]);
@@ -50,8 +53,11 @@ export class App extends Component {
 
   handleSearchSubmit = query => {
     this.setState({
-      query, images: [], page: 1, totalPages: 0,
-    })
+      query,
+      images: [],
+      page: 1,
+      totalPages: 0,
+    });
   };
 
   openModal = (largeImageURL) => { this.setState({ largeImageURL }); };
@@ -59,18 +65,19 @@ export class App extends Component {
   closeModal = () => { this.setState({ largeImageURL: '' }); };
 
   componentDidUpdate(prevProps, prevState) {
-  if ( prevState.query !==this.state.query || prevState.page !== this.state.page) {
-    this.loadImages(this.state.query, this.state.page);
+    if (prevState.query !== this.state.query || 
+      prevState.page !== this.state.page) {
+      this.loadImages(this.setState.query, this.state.page);
+      }
   }
-  };
+
   render() {
     return (
-     
       <Container>
         <Searchbar onSearch={this.handleSearchSubmit} />
         {this.state.error && <p>Something went wrong</p>}
 
-        {this.state.images.length > 0 &&( <ImageGallery images={this.images} onClick={this.openModal} />)}
+        {this.state.images.length > 0 &&( <ImageGallery images={this.state.images} onClick={this.openModal} />)}
         {this.state.isLoading && <Loader />}
 
         {this.state.page < Math.ceil(this.state.totalPages / 12) && (<Button loadMore={this.loadMore} />)}
