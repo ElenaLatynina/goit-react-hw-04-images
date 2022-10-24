@@ -6,9 +6,18 @@ export default function ImageGallery({ images, onClick }) {
     return (
         <List>
             {images.map(({ webformatURL, largeImageURL, tags, id }) => (
-                <ImageGalleryItem key={id} webformatURL={webformatURL} largeImageURL={largeImageURL} tags={tags} onClick={onClick}></ImageGalleryItem>
+                <ImageGalleryItem
+                    key={id}
+                    webformatURL={webformatURL}
+                    largeImageURL={largeImageURL}
+                    tags={tags}
+                    onClick={onClick}
+                />
             ))}
         </List>
     );
-};
+}
+
+
+
 

@@ -5,10 +5,10 @@ import { ModalPicture, Overlay  } from './Modal.styled';
 
 export class Modal extends Component{
 
-    handleKeydown = event => {
-    if (event.code === 'Escape') {
-      this.props.onClose();
-    }
+    handleKeydown = element => {
+        if (element.code === 'Escape') {
+            this.props.onClose();
+        }
     };
     
     handleBackdropClick = event => {

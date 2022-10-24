@@ -6,7 +6,10 @@ export default function ImageGalleryItem({
 }) {
     return (
         <Item>
-            <Img src={webformatURL} alt={tags} onClick={() => (onClick(largeImageURL))} />
+            <Img
+                src={webformatURL}
+                alt={tags}
+                onClick={() => (onClick(largeImageURL))} />
         </Item>
     );
 };
