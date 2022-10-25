@@ -25,25 +25,25 @@ export default class Searchbar extends Component {
 
     return (
       <Header>
-      <Searchform onSubmit={handleSubmit}>
-        <Searchbutton type="submit">
-          <IconContext.Provider
+        <Searchform onSubmit={handleSubmit}>
+          <Searchbutton type="submit">
+            <IconContext.Provider
               value={{ style: { verticalAlign: 'middle' } }}
             >
               <BiSearchAlt2 size={24} />
-          </IconContext.Provider>
-          <Label>Searh</Label>
+            </IconContext.Provider>
+            <Label>Searh</Label>
           </Searchbutton>
           <Input
-          type="text"
-          autocomplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-          value={query}
-          onChange={handleChange}/>
-      </Searchform>
-    </Header>
-    )
+            type="text"
+            autocomplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            value={query}
+            onChange={handleChange} />
+        </Searchform>
+      </Header>
+    );
     
   }
 

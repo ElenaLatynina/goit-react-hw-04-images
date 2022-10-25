@@ -47,7 +47,7 @@ export class App extends Component{
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
     if (prevState.query !== query || prevState.page !== page) {
       this.loadImages(query, page);
