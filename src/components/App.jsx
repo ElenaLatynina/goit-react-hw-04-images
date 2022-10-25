@@ -78,8 +78,9 @@ export class App extends Component{
     return (
       <Container>
         <Searchbar onSearch={this.handleSearchSubmit} />
-        {this.state.error && <p>Something went wrong:{this.state.error.message}</p>}
-        {this.state.items.length > 0 && (
+        
+        {this.state.error && <p>Something went wrong: {this.state.error.message}</p>}
+        {this.state.images.length > 0 && (
           <ImageGallery images={this.state.images} onClick={this.openModal} />
         )}
         {this.state.isLoading && <Loader />}

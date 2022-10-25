@@ -3,14 +3,20 @@ import axios from "axios";
 
 export async function receiveData(query, page) {
   const BASE_URL = 'https://pixabay.com/api/';
-  const API_KEY = '29584253-cd90e7f8e2a20a00eedab1d09';
-  const PARAMS = 'image_type=photo&orientation=horizontal&safesearch=true';
-  const Per_page = 12;
-    
-  const url = `${BASE_URL}?key=${API_KEY}&q=${query}&${PARAMS}&page=${page}&per_page=${Per_page}`;
-  const response = await axios.get(url);
-  return response.data;
+  const params = {
+  key: '29584253-cd90e7f8e2a20a00eedab1d09',
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
+  per_page: 12,
+
   
+  };
+ 
+  const url = `${BASE_URL}?q=${this.Searchquery}&page=${this.page}`;
+      const response = await axios.get(url, { params });
+      return response.data;
+
 }
 
 
