@@ -38,16 +38,19 @@ export class App extends Component{
         images: [...prevState.images, ...data.hits],
         totalPages: data.totalHits,
       }));
+
     } catch (error) {
       this.setState({ error });
+
     } finally {
       this.setState({ isLoading: false });
     }
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
-      this.loadImages(this.state.query,this.state.page);
+    const { query, page } = this.state;
+    if (prevState.query !== query || prevState.page !== page) {
+      this.loadImages(query, page);
     }
   }
 
@@ -75,20 +78,21 @@ export class App extends Component{
   };
 
   render() {
+    const{images, largeImageURL, page, totalPages, isLoading, error} =this.state
     return (
       <Container>
         <Searchbar onSearch={this.handleSearchSubmit} />
         
-        {this.state.error && <p>Something went wrong: {this.state.error.message}</p>}
-        {this.state.images.length > 0 && (
-          <ImageGallery images={this.state.images} onClick={this.openModal} />
+        {error && <p>Something went wrong: {error.message}</p>}
+        {images.length > 0 && (
+          <ImageGallery images={images} onClick={this.openModal} />
         )}
-        {this.state.isLoading && <Loader />}
-        {this.state.page < Math.ceil(this.state.totalPages / 12) && (
+        {isLoading && <Loader />}
+        {page < Math.ceil(totalPages / 12) && (
           <Button loadMore={this.loadMore} />
         )}
-        {this.state.largeImageURL && (
-          <Modal onClose={this.state.closeModal} largeImageURL={this.state.largeImageURL} />
+        {largeImageURL && (
+          <Modal onClose={this.closeModal} largeImageURL={largeImageURL} />
         )}
       </Container>
     );
