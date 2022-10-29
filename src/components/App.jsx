@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import * as API from '../components/API/api';
-// import axios from "axios";
 import { Container } from './App.styled';
 import { Searchbar } from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
-// import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'components/Modal';
 
 export class App extends Component{
