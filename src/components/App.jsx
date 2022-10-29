@@ -78,19 +78,24 @@ export class App extends Component{
   };
 
   render() {
-    const{images, largeImageURL, page, totalPages, isLoading, error} =this.state
+    const { images, largeImageURL, page, totalPages, isLoading, error } = this.state;
+
     return (
       <Container>
         <Searchbar onSearch={this.handleSearchSubmit} />
         
         {error && <p>Something went wrong: {error.message}</p>}
+
         {images.length > 0 && (
           <ImageGallery images={images} onClick={this.openModal} />
         )}
+
         {isLoading && <Loader />}
+
         {page < Math.ceil(totalPages / 12) && (
           <Button loadMore={this.loadMore} />
         )}
+        
         {largeImageURL && (
           <Modal onClose={this.closeModal} largeImageURL={largeImageURL} />
         )}

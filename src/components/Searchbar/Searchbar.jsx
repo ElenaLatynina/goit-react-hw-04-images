@@ -4,7 +4,9 @@ import { Header, Searchform, Input, Label, Searchbutton } from './Searchbar.styl
 import { IconContext } from 'react-icons';
 import { BiSearchAlt2 } from 'react-icons/bi';
 // import { toast } from 'react-toastify';
-export default class Searchbar extends Component {
+
+
+export  class Searchbar extends Component {
   state = {
     query: '',
   };
@@ -56,7 +58,7 @@ export default class Searchbar extends Component {
 
     
 
-// export default Searchbar;
+export default Searchbar;
 
 // Searchbar.propTypes = {
 //   onSubmit: PropTypes.func.isRequired,
