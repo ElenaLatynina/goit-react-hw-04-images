@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import * as API from '../components/API/api';
 // import axios from "axios";
 import { Container } from './App.styled';
-import Searchbar from './Searchbar';
-import ImageGallery from './ImageGallery';
+import { Searchbar } from './Searchbar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
-import Loader from './Loader';
+import Loader from './Loader/Loader';
 // import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'components/Modal';
@@ -95,7 +95,7 @@ export class App extends Component{
         {page < Math.ceil(totalPages / 12) && (
           <Button loadMore={this.loadMore} />
         )}
-        
+
         {largeImageURL && (
           <Modal onClose={this.closeModal} largeImageURL={largeImageURL} />
         )}

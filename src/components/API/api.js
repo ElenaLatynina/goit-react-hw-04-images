@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export async function receiveData(searchQuery, page) {
   const BASE_URL = 'https://pixabay.com/api/';
