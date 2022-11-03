@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ElenaLatynina/goit-react-hw-04-images.git/static/css/main.055413f7.css",
+    "main.js": "/ElenaLatynina/goit-react-hw-04-images.git/static/js/main.d1edce40.js",
+    "index.html": "/ElenaLatynina/goit-react-hw-04-images.git/index.html",
+    "main.055413f7.css.map": "/ElenaLatynina/goit-react-hw-04-images.git/static/css/main.055413f7.css.map",
+    "main.d1edce40.js.map": "/ElenaLatynina/goit-react-hw-04-images.git/static/js/main.d1edce40.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.055413f7.css",
+    "static/js/main.d1edce40.js"
+  ]
+}
