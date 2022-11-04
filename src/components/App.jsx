@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useState } from 'react';
 import * as API from '../components/API/api';
 import { Container } from './App.styled';
 import { Searchbar } from './Searchbar/Searchbar';
@@ -8,24 +9,21 @@ import Loader from './Loader/Loader';
 // import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'components/Modal';
 
-export class App extends Component{
-  state = {
-    page: 1,
-    query: '',
-    images: [],
-    largeImageURL: '',
-    isLoading: false,
-    totalPages: 0,
-    error: null,
-  };
+export const App () => {
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState('');
+  const [images, setImages] = useState([]);
+  const [largeImageURL, setLargeImageURL] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [error, setError] = useState(null);
 
-  loadImages = async (query, page) => {
-    this.setState({ isLoading: true });
-
+  const loadImages = async  (query, page) => {
+    setIsLoading = true;
     try {
       const data = await API.receiveData(query, page);
       if (data.hits.length === 0) {
-        this.setState({
+        setError= ({
           error: {
             message: `Sorry, there are no images matching your query. Please try again`,
           },
@@ -44,6 +42,18 @@ export class App extends Component{
       this.setState({ isLoading: false });
     }
   };
+
+}
+
+
+
+
+  
+
+  loadImages = async (query, page) => {
+    this.setState({ isLoading: true });
+
+    
 
   componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
