@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { useState } from 'react';
+// import React, { Component } from 'react';
+import { useState, useEffect } from 'react';
 import * as API from '../components/API/api';
 import { Container } from './App.styled';
 import { Searchbar } from './Searchbar/Searchbar';
@@ -9,7 +9,7 @@ import Loader from './Loader/Loader';
 // import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'components/Modal';
 
-export const App () => {
+export const App= () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [images, setImages] = useState([]);
@@ -18,97 +18,85 @@ export const App () => {
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(null);
 
-  const loadImages = async  (query, page) => {
-    setIsLoading = true;
-    try {
-      const data = await API.receiveData(query, page);
-      if (data.hits.length === 0) {
-        setError= ({
-          error: {
-            message: `Sorry, there are no images matching your query. Please try again`,
-          },
-        });
-        return;
+  useEffect(() => {
+
+    const loadImages = async (query, page) => {
+      setIsLoading(true);
+
+      try {
+        const data = await API.receiveData(query, page);
+        if (data.hits.length === 0) {
+          setError  (
+            `Sorry, there are no images matching your query. Please try again`
+            
+          );
+          return;
+        }
+        setImages(images => [...images, ...data.hits]);
+        setTotalPages(data.totalHits);
+        
+      
+
+      } catch (error) {
+        setError(error);
+
+      } finally {
+        setIsLoading(false);
       }
-      this.setState(prevState => ({
-        images: [...prevState.images, ...data.hits],
-        totalPages: data.totalHits,
-      }));
-
-    } catch (error) {
-      this.setState({ error });
-
-    } finally {
-      this.setState({ isLoading: false });
-    }
-  };
-
-}
-
-
-
+    };
 
   
-
-  loadImages = async (query, page) => {
-    this.setState({ isLoading: true });
-
+    loadImages(query, page);
     
+  }, [query, page]);
 
-  componentDidUpdate(_, prevState) {
-    const { query, page } = this.state;
-    if (prevState.query !== query || prevState.page !== page) {
-      this.loadImages(query, page);
-    }
-  }
 
-  handleSearchSubmit = query => {
-    this.setState({
-      query,
-      images: [],
-      page: 1,
-      totalPages: 0,
-    });
+  const handleSearchSubmit = query => {
+    setQuery(query);
+    setImages([]);
+    setPage(1);
+    setTotalPages(0);
+
+  };
+  
+
+  const loadMore = () => {
+    setPage(prevState => (
+      prevState.page + 1
+    ));
   };
 
-  loadMore = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1,
-    }));
+  const openModal = largeImageURL => {
+    setLargeImageURL(largeImageURL);
   };
 
-  openModal = largeImageURL => {
-    this.setState({ largeImageURL });
+  const closeModal = () => {
+    setLargeImageURL('');
   };
 
-  closeModal = () => {
-    this.setState({ largeImageURL: '' });
-  };
-
-  render() {
-    const { images, largeImageURL, page, totalPages, isLoading, error } = this.state;
-
-    return (
-      <Container>
-        <Searchbar onSearch={this.handleSearchSubmit} />
+  return (
+    <Container>
+      <Searchbar onSearch={handleSearchSubmit} />
         
-        {error && <p>Something went wrong: {error.message}</p>}
+      {error && <p>Something went wrong: {error.message}</p>}
 
-        {images.length > 0 && (
-          <ImageGallery images={images} onClick={this.openModal} />
-        )}
+      {images.length > 0 && (
+        <ImageGallery images={images} onClick={openModal} />
+      )}
 
-        {isLoading && <Loader />}
+      {isLoading && <Loader />}
 
-        {page < Math.ceil(totalPages / 12) && (
-          <Button loadMore={this.loadMore} />
-        )}
+      {page < Math.ceil(totalPages / 12) && (
+        <Button loadMore={loadMore} />
+      )}
 
-        {largeImageURL && (
-          <Modal onClose={this.closeModal} largeImageURL={largeImageURL} />
-        )}
-      </Container>
-    );
-  }
-}
+      {largeImageURL && (
+        <Modal onClose={closeModal} largeImageURL={largeImageURL} />
+      )}
+    </Container>
+  );
+    
+};
 
+
+export default App;
