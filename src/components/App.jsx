@@ -78,7 +78,7 @@ export const App= () => {
     <Container>
       <Searchbar onSearch={handleSearchSubmit} />
         
-      {error && <p>Something went wrong: {error.message}</p>}
+      {error && (<p>Something went wrong</p>)}
 
       {images.length > 0 && (
         <ImageGallery images={images} onClick={openModal} />
