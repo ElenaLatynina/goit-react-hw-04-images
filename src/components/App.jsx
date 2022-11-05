@@ -19,6 +19,9 @@ export const App= () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!query) {
+      return;
+    };
 
     const loadImages = async (query, page) => {
       setIsLoading(true);
@@ -62,7 +65,7 @@ export const App= () => {
 
   const loadMore = () => {
     setPage(prevState => (
-      prevState.page + 1
+      prevState + 1
     ));
   };
 
